@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Beans;
 
+import Beans.Aluguel;
 import java.sql.Date;
 
 /**
@@ -16,13 +17,17 @@ public class Mensalidade {
     private Aluguel aluguel;
     private float valor;
     private String status;
-    private Date mes;
+    private String mes;
 
-    public Mensalidade(Aluguel aluguel, float valor, String status, Date mes) {     
+    public Mensalidade(Aluguel aluguel, float valor, String status, String mes) {     
         this.aluguel = aluguel;
         this.valor = valor;
         this.status = status;
         this.mes = mes;
+    }
+
+    public Mensalidade() {
+        
     }
 
     public int getId() {
@@ -57,14 +62,16 @@ public class Mensalidade {
         this.status = status;
     }
 
-    public Date getMes() {
+    public String getMes() {
         return mes;
     }
 
-    public void setMes(Date mes) {
+    public void setMes(String mes) {
         this.mes = mes;
     }
-    
+
+   
+
     
     
 }

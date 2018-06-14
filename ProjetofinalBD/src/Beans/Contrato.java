@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Beans;
 
 import java.sql.Date;
 
@@ -14,13 +14,13 @@ import java.sql.Date;
 public class Contrato {
 
     private int id;
-    private Date dataInicio;
-    private Date dataFim;
+    private String dataInicio;
+    private String dataFim;
     private Locatario locatario;
     private Locador locador;
     private String status;
 
-    public Contrato(Date dataInicio, Date dataFim, Locatario locatario, Locador locador, String status) {        
+    public Contrato(String dataInicio, String dataFim, Locatario locatario, Locador locador, String status) {        
         this.dataInicio = dataInicio;
         this.dataFim = dataFim;
         this.locatario = locatario;
@@ -28,8 +28,8 @@ public class Contrato {
         this.status = status;
     }
 
-    Contrato() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Contrato() {
+
     }
 
     public int getId() {
@@ -40,21 +40,24 @@ public class Contrato {
         this.id = id;
     }
 
-    public Date getDataInicio() {
+    public String getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
+    public void setDataInicio(String dataInicio) {
         this.dataInicio = dataInicio;
     }
 
-    public Date getDataFim() {
+    public String getDataFim() {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
+    public void setDataFim(String dataFim) {
         this.dataFim = dataFim;
     }
+
+   
+
 
     public Locatario getLocatario() {
         return locatario;

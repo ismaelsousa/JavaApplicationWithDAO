@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package form;
+package Form;
+
 
 import javax.swing.JFrame;
 
@@ -172,65 +173,57 @@ public class Principal extends javax.swing.JFrame {
 
     private void locadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locadorActionPerformed
         // TODO add your handling code here:
-        JFrame frame = new JFrame();
-        frame.setContentPane(new FormLocador());
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        FormLocador janela = new FormLocador();
+        janela.setVisible(true);
+        janela.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+//      JFrame frame = new JFrame();
+//        frame.setContentPane(new FormLocador());
+//        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.pack();
+//       frame.setVisible(true);
     }//GEN-LAST:event_locadorActionPerformed
 
     private void apartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apartamentoActionPerformed
         // TODO add your handling code here:
-        JFrame frame = new JFrame();
-        frame.setContentPane(new FormApartamento());
-        //S frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        FormApartamento ap = new FormApartamento();
+        ap.setVisible(true);
+        ap.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_apartamentoActionPerformed
 
     private void locatarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locatarioActionPerformed
         // TODO add your handling code here:
-        JFrame frame = new JFrame();
-        frame.setContentPane(new FormLocatario());
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        FormLocatario loc = new FormLocatario();
+        loc.setVisible(true);
+        loc.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_locatarioActionPerformed
 
     private void aluguelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aluguelActionPerformed
         // TODO add your handling code here:
-        JFrame frame = new JFrame();
-        frame.setContentPane(new FormAluguel());
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        FormAluguell alu = new FormAluguell();
+        
+        alu.setVisible(true);
+        alu.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_aluguelActionPerformed
 
     private void contratosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contratosActionPerformed
-        // TODO add your handling code here:
-        JFrame frame = new JFrame();
-        frame.setContentPane(new FormContrato());
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        FormContrato co = new FormContrato();
+        co.setVisible(true);
+        co.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_contratosActionPerformed
 
     private void mensalidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mensalidadeActionPerformed
         // TODO add your handling code here:
-        JFrame frame = new JFrame();
-        frame.setContentPane(new FormMensalidade());
-        // frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        FormMensalidade m = new FormMensalidade();
+        m.setVisible(true);
+        m.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_mensalidadeActionPerformed
 
     private void condominioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_condominioActionPerformed
         // TODO add your handling code here:
-        JFrame frame = new JFrame();
-        frame.setContentPane(new FormCondominio());
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
+        FormCondominio c = new FormCondominio();
+        
+        c.setVisible(true);
+        c.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_condominioActionPerformed
 
     /**

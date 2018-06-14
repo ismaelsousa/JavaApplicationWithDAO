@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Beans;
+
+
 
 /**
  *
@@ -21,11 +23,11 @@ public class Condominio {
         this.numero = numero;
     }
 
-    Condominio() {
+   public Condominio() {
       
     }
 
-    Condominio(int id) {
+  public  Condominio(int id) {
        this.id = id;
     }
 

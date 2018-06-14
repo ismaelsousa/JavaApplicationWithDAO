@@ -3,24 +3,30 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Dao;
 
-import Connection.ConnectionFactory;
+import Beans.Apartamento;
+import Beans.Condominio;
+import Beans.Condominio;
+import Beans.ConnectionFactory;
+import Beans.Locador;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 /**
  *
  * @author ismae
  */
-public class ApartamentoDAO {
+public class DAOApartamento {
     
     private Connection con;
 
-    public ApartamentoDAO() {
+    public DAOApartamento() {
         this.con = ConnectionFactory.getConnection();
     }
     
@@ -42,13 +48,15 @@ public class ApartamentoDAO {
 
     }
     
-    public boolean updateApartamento(Apartamento apartamento) {
-        String sql = "UPDATE apartamento SET estado = ? WHERE id = ? ";
+    public boolean update(Apartamento apartamento) {
+        String sql = "UPDATE apartamento SET qtd_quarto = ? , estado = ?, id_condominio = ? WHERE id = ? ";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setString(1, apartamento.getEstado());
-            stmt.setInt(2, apartamento.getId());
+            stmt.setInt(1, apartamento.getQtdQuarto());
+            stmt.setString(2, apartamento.getEstado());
+            stmt.setInt(3, apartamento.getCondominio().getId());
+            stmt.setInt(4, apartamento.getId());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -80,21 +88,14 @@ public class ApartamentoDAO {
         ResultSet rs = null;
 
         ArrayList<Apartamento> Apartamentos = new ArrayList<>();
-        String sql = "select * from view_apartamento"; 
+        String sql = "select * from apartamento"; 
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Apartamento a = new Apartamento();
-                Condominio c = new Condominio();
-                Locador l = new Locador(rs.getInt("id_locador"));
-               
-                c.setLocador(l);
-                c.setId(rs.getInt("cid"));                
-                c.setRua(rs.getString("rua"));
-                c.setNumero(rs.getInt("numero"));
-                
+                Condominio c = new Condominio(rs.getInt("id_condominio"));   
                 a.setId(rs.getInt("id"));
                 a.setQtdQuarto(rs.getInt("qtd_quarto"));
                 a.setEstado(rs.getString("estado"));
@@ -115,7 +116,7 @@ public class ApartamentoDAO {
     public static void main(String[] args) {
         Apartamento a = new Apartamento(3, "desoculpado", new Condominio(1));
         a.setId(1);
-        ApartamentoDAO ap = new ApartamentoDAO();        
+        DAOApartamento ap = new DAOApartamento();        
         ap.delete(a);
     }
     

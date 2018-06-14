@@ -3,24 +3,29 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Dao;
 
-import Connection.ConnectionFactory;
+import Beans.Condominio;
+import Beans.Condominio;
+import Beans.ConnectionFactory;
+import Beans.Locador;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 
 /**
  *
  * @author ismae
  */
-public class CondominioDAO {
+public class DAOCondominio {
 
     private Connection con = null;
 
-    public CondominioDAO() {
+    public DAOCondominio() {
         con = ConnectionFactory.getConnection();
     }
 
@@ -43,13 +48,17 @@ public class CondominioDAO {
     }
 
     public boolean updateCondominio(Condominio condominio) {
-        String sql = "UPDATE condominio SET id_locador = ? WHERE id = ? ";
+        String sql = "UPDATE condominio SET id_locador = ?, rua = ?, numero = ? WHERE id = ? ";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, condominio.getLocador().getId());
-            stmt.setInt(2, condominio.getId());
+            stmt.setString(2, condominio.getRua());
+            stmt.setInt(3, condominio.getNumero());
+            stmt.setInt(4, condominio.getId());
+            
             stmt.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Alterado com sucesso");
             return true;
         } catch (SQLException ex) {
             return false;
@@ -80,28 +89,23 @@ public class CondominioDAO {
         ResultSet rs = null;
 
         ArrayList<Condominio> condominios = new ArrayList<>();
-        String sql = "select * from view_condominio"; 
+        String sql = "select * from condominio"; 
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
 
             while (rs.next()) {
                 Condominio c = new Condominio();
-                Locador a =new Locador();
-                
-                a.setId(rs.getInt("lid"));
-                a.setNome(rs.getString("lnome"));
-                a.setCpf(rs.getInt("lcpf"));
-                a.setTelefone(rs.getString("ltel"));                
-                                
+                Locador a =new Locador();                               
                 c.setLocador(a);
                 c.setId(rs.getInt("id"));                
+                a.setId(rs.getInt("id_locador"));
                 c.setRua(rs.getString("rua"));
                 c.setNumero(rs.getInt("numero"));
                 condominios.add(c);
             }
         } catch (SQLException ex) {
-            System.out.println("erro ao fazer select de aluguel");
+            System.out.println("erro ao fazer select de condominio");
         }finally{
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
@@ -112,7 +116,7 @@ public class CondominioDAO {
     
 
     public static void main(String[] args) {
-        CondominioDAO d = new CondominioDAO();
+        DAOCondominio d = new DAOCondominio();
        
         ArrayList<Condominio> c = d.findAll();
         for (Condominio condominio : c) {

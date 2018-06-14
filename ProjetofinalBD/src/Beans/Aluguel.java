@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Beans;
+
+
 
 /**
  *
@@ -19,6 +21,14 @@ public class Aluguel {
         this.apartamento = apartamento;
         this.contrato = contrato;
                 
+    }
+
+    public Aluguel() {
+       
+    }
+
+    public Aluguel(int aInt) {
+       this.id = aInt;
     }
 
     public int getId() {

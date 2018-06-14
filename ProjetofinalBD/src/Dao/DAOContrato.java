@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Dao;
 
-import Connection.ConnectionFactory;
+import Beans.ConnectionFactory;
+import Beans.Contrato;
+import Beans.Contrato;
+import Beans.Locador;
+import Beans.Locatario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -18,11 +22,11 @@ import java.util.GregorianCalendar;
  *
  * @author ismae
  */
-public class ContratoDAO {
+public class DAOContrato {
 
     private Connection con = null;
 
-    public ContratoDAO() {
+    public DAOContrato() {
         con = ConnectionFactory.getConnection();
     }
 
@@ -31,8 +35,8 @@ public class ContratoDAO {
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setDate(1, contrato.getDataInicio());
-            stmt.setDate(2, contrato.getDataFim());
+            stmt.setString(1, contrato.getDataInicio());
+            stmt.setString(2, contrato.getDataFim());
             stmt.setInt(3, contrato.getLocatario().getId());
             stmt.setInt(4, contrato.getLocador().getId());
             stmt.setString(5, contrato.getStatus());
@@ -45,13 +49,13 @@ public class ContratoDAO {
         }
     }
 
-    public boolean updateContrato(Contrato contrato) {
+    public boolean update(Contrato contrato) {
         String sql = "UPDATE contrato SET data_inicio = ?, data_fim = ?, id_locatario= ?, id_locador = ?, status = ? WHERE id = ? ";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
-            stmt.setDate(1, contrato.getDataInicio());
-            stmt.setDate(2, contrato.getDataFim());
+            stmt.setString(1, contrato.getDataInicio());
+            stmt.setString(2, contrato.getDataFim());
             stmt.setInt(3, contrato.getLocatario().getId());
             stmt.setInt(4, contrato.getLocador().getId());
             stmt.setString(5, contrato.getStatus());
@@ -87,12 +91,22 @@ public class ContratoDAO {
         ResultSet rs = null;
 
         ArrayList<Contrato> Contratos = new ArrayList<>();
-        String sql = "select * from view_apartamento"; 
+        String sql = "select * from contrato"; 
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
 
-            while (rs.next()) {            
+            while (rs.next()) { 
+                Contrato c = new Contrato();
+                c.setId(rs.getInt("id"));
+                c.setDataInicio(rs.getString("data_inicio"));
+                c.setDataFim(rs.getString("data_fim"));
+                c.setLocador(new Locador(rs.getInt("id_locador")));
+                c.setLocatario(new Locatario(rs.getInt("id_locatario")));
+                c.setStatus(rs.getString("status"));
+                
+                Contratos.add(c);
+                
                  
                 
             }
@@ -108,13 +122,7 @@ public class ContratoDAO {
 
     //falta o select 
     public static void main(String[] args) {
-        Locador loc = new Locador(2);
-        Locatario loca = new Locatario(4);
-        java.sql.Date a = new Date(1999, 12, 3);
-        Contrato cont = new Contrato(a, a, loca, loc, "mudou");
-        cont.setId(2);
-        ContratoDAO dao = new ContratoDAO();
-        dao.delete(cont);
+       
 
     }
 

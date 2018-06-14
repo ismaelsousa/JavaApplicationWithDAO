@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Beans;
+
+
 
 /**
  *
  * @author ismae
  */
-class Apartamento {
+public class Apartamento {
     private int id;
     private int qtdQuarto;
     private String estado;
@@ -22,8 +24,8 @@ class Apartamento {
         this.condominio = condominio;                   
     }
 
-    Apartamento() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+   public Apartamento() {
+
     }
 
     public int getId() {

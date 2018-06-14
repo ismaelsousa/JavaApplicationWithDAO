@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Beans;
 
 /**
  *
  * @author ismae
  */
-class Locador {
+public class Locador {
 
     private int id;
     private String nome;
@@ -22,17 +22,17 @@ class Locador {
         this.telefone = telefone;
     }
 
-    Locador(int id, String nome, int cpf, String telefone) {
+    public Locador(int id, String nome, int cpf, String telefone) {
         this.id = id;
         this.nome = nome;
         this.cpf = cpf;
         this.telefone = telefone;
     }
 
-    Locador() {
+    public Locador() {
         
     }
-    Locador(int id) {
+    public Locador(int id) {
         this.id = id;
     }
     

@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.dao;
+package Dao;
 
-import Connection.ConnectionFactory;
+import Beans.Aluguel;
+import Beans.Apartamento;
+import Beans.ConnectionFactory;
+import Beans.Contrato;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,16 +19,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 /**
  * CRUD
  *
  * @author ismae
  */
-public class AluguelDAO {
+public class DAOAluguel {
 
     private Connection con = null;
 
-    public AluguelDAO() {
+    public DAOAluguel() {
         con = ConnectionFactory.getConnection();
     }
 
@@ -44,13 +49,14 @@ public class AluguelDAO {
         }
 
     }
-    public boolean updateApartamento(Aluguel aluguel) {
-        String sql = "UPDATE aluguel SET id_apartamento = ? WHERE id = ? ";
+    public boolean update(Aluguel aluguel) {
+        String sql = "UPDATE aluguel SET id_apartamento = ?, id_contrato = ? WHERE id = ? ";
         PreparedStatement stmt = null;
         try {
             stmt = con.prepareStatement(sql);
             stmt.setInt(1, aluguel.getApartamento().getId());
-            stmt.setInt(2, aluguel.getId());
+            stmt.setInt(2, aluguel.getContrato().getId());
+            stmt.setInt(3, aluguel.getId());
             stmt.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -79,19 +85,18 @@ public class AluguelDAO {
     public ArrayList<Aluguel> findAll() {
         PreparedStatement stmt = null;
         ResultSet rs = null;
-
         ArrayList<Aluguel> algueis = new ArrayList<>();
         String sql = "SELECT * FROM aluguel";
         try {
             stmt = con.prepareStatement(sql);
             rs = stmt.executeQuery();
-
             while (rs.next()) {
                 Apartamento ap = new Apartamento();
                 ap.setId(rs.getInt("id_apartamento"));
                 Contrato c = new Contrato();
                 c.setId(rs.getInt("id_contrato"));
                 Aluguel a = new Aluguel(ap, c);
+                a.setId(rs.getInt("id"));
                 algueis.add(a);
             }
         } catch (SQLException ex) {
@@ -99,8 +104,6 @@ public class AluguelDAO {
         }finally{
             ConnectionFactory.closeConnection(con, stmt, rs);
         }
-
         return algueis;
     }
-
 }
